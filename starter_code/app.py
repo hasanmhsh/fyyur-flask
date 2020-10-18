@@ -448,7 +448,13 @@ def artists():
   #   "id": 6,
   #   "name": "The Wild Sax Band",
   # }]
-  data = db.session.query(Artist.name).all()
+  artists = Artist.query.all()
+  data = []
+  for artist in artists:
+    data.append({
+      "id": artist.id,
+      "name": artist.name,
+    })
   return render_template('pages/artists.html', artists=data)
 
 @app.route('/artists/search', methods=['POST'])
